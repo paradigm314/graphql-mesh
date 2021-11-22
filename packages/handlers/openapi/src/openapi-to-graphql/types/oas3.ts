@@ -159,6 +159,7 @@ export type OperationObject = {
   deprecated?: boolean;
   security?: SecurityRequirementObject[];
   servers?: ServerObject[];
+  [key: string]: any;
 };
 
 export type PathItemObject = {
