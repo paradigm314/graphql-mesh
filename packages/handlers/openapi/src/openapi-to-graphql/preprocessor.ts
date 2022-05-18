@@ -68,8 +68,18 @@ function processOperation<TSource, TContext, TArgs>(
   }
 
   // Hold on to the operationId
-  const operationId =
-    typeof operation.operationId !== 'undefined' ? operation.operationId : Oas3Tools.generateOperationId(method, path);
+
+  // Use Custom OperationId Key
+  let operationId;
+  const operationIdField = 'x-yv-rpc-method'; // TODO: Define in options
+  if (typeof operation[operationIdField] !== 'undefined') {
+    operationId = operation[operationIdField];
+  } else {
+    operationId =
+      typeof operation.operationId !== 'undefined'
+        ? operation.operationId
+        : Oas3Tools.generateOperationId(method, path);
+  }
 
   // Request schema
   const { payloadContentType, payloadSchema, payloadSchemaNames, payloadRequired } = Oas3Tools.getRequestSchemaAndNames(
