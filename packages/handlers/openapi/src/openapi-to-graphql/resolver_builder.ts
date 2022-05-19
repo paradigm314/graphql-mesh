@@ -478,7 +478,17 @@ export function getResolver<TSource, TContext, TArgs>(
     for (const paramName in query) {
       const val = query[paramName];
       if (val !== undefined) {
-        urlObject.searchParams.set(paramName, val);
+        /**
+         * If the query parameter is an array, that means `explode: true` was set and we should append each key/value
+         * as a new search parameter. Else, it is a either a singular value or a comma-separated string of the values
+         * and we can just set the search parameter.
+         * https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+         */
+        if (Array.isArray(val)) {
+          val.forEach(v => urlObject.searchParams.append(paramName, v));
+        } else {
+          urlObject.searchParams.set(paramName, val);
+        }
       }
     }
 
@@ -1235,7 +1245,18 @@ export function extractRequestDataFromArgs<TSource, TContext, TArgs>(
 
         // Query parameters
         case 'query':
-          qs[param.name] = args[sanitizedParamName];
+          /**
+           * Spec-compliant query string serialization:
+           * http:pec.openapis.org/oas/v3.0.3#style-examples
+           *
+           * Whenever the query string value is an array, we check if it
+           * should be `exploded`. In this case, we don't serialize anything.
+           * Otherwise, the array will be joined in comma-separated fashion.
+           */
+          const arg = args[sanitizedParamName];
+          const shouldBeCommaSeparated = Array.isArray(arg) && !param.explode;
+
+          qs[param.name] = shouldBeCommaSeparated ? arg.join(',') : arg;
           break;
 
         // Header parameters
