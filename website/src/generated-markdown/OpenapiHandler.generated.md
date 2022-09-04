@@ -14,3 +14,4 @@ Default: false
   * `type` (type: `String (query | mutation)`, required)
   * `fieldName` (type: `String`, required)
 * `queryParams` (type: `JSON`) - JSON object representing the query search parameters to add to the API calls
+* `customOperationIdField` (type: `String`) - The name of the field holding your operation id fieldName

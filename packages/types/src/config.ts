@@ -888,6 +888,10 @@ export interface OpenapiHandler {
   queryParams?: {
     [k: string]: any;
   };
+  /**
+   * The name of the field holding your operation id fieldName
+   */
+  customOperationIdField?: string;
 }
 export interface OASSelectQueryOrMutationFieldConfig {
   /**
