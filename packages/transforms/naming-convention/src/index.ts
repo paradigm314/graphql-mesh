@@ -26,6 +26,7 @@ import {
   snakeCase,
 } from 'change-case';
 
+import { camelCaseTransformMerge as camelCaseTransformMergeFn } from 'camel-case';
 import { upperCase } from 'upper-case';
 import { lowerCase } from 'lower-case';
 import { resolvers as scalarsResolversMap } from 'graphql-scalars';
@@ -33,8 +34,13 @@ import { resolvers as scalarsResolversMap } from 'graphql-scalars';
 type NamingConventionFn = (input: string) => string;
 type NamingConventionType = YamlConfig.NamingConventionTransformConfig['typeNames'];
 
+function camelCaseTransformMerge(input: string) {
+  return camelCase(input, { transform: camelCaseTransformMergeFn });
+}
+
 const NAMING_CONVENTIONS: Record<NamingConventionType, NamingConventionFn> = {
   camelCase,
+  camelCaseTransformMerge,
   capitalCase,
   constantCase,
   dotCase,

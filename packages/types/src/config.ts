@@ -1303,10 +1303,11 @@ export interface HoistFieldTransformFieldPathConfigObject {
  */
 export interface NamingConventionTransformConfig {
   /**
-   * Allowed values: camelCase, capitalCase, constantCase, dotCase, headerCase, noCase, paramCase, pascalCase, pathCase, sentenceCase, snakeCase, upperCase, lowerCase
+   * Allowed values: camelCase, camelCaseTransformMerge, capitalCase, constantCase, dotCase, headerCase, noCase, paramCase, pascalCase, pathCase, sentenceCase, snakeCase, upperCase, lowerCase
    */
   typeNames?:
     | 'camelCase'
+    | 'camelCaseTransformMerge'
     | 'capitalCase'
     | 'constantCase'
     | 'dotCase'
@@ -1320,10 +1321,11 @@ export interface NamingConventionTransformConfig {
     | 'upperCase'
     | 'lowerCase';
   /**
-   * Allowed values: camelCase, capitalCase, constantCase, dotCase, headerCase, noCase, paramCase, pascalCase, pathCase, sentenceCase, snakeCase, upperCase, lowerCase
+   * Allowed values: camelCase, camelCaseTransformMerge, capitalCase, constantCase, dotCase, headerCase, noCase, paramCase, pascalCase, pathCase, sentenceCase, snakeCase, upperCase, lowerCase
    */
   fieldNames?:
     | 'camelCase'
+    | 'camelCaseTransformMerge'
     | 'capitalCase'
     | 'constantCase'
     | 'dotCase'
@@ -1337,10 +1339,11 @@ export interface NamingConventionTransformConfig {
     | 'upperCase'
     | 'lowerCase';
   /**
-   * Allowed values: camelCase, capitalCase, constantCase, dotCase, headerCase, noCase, paramCase, pascalCase, pathCase, sentenceCase, snakeCase, upperCase, lowerCase
+   * Allowed values: camelCase, camelCaseTransformMerge, capitalCase, constantCase, dotCase, headerCase, noCase, paramCase, pascalCase, pathCase, sentenceCase, snakeCase, upperCase, lowerCase
    */
   enumValues?:
     | 'camelCase'
+    | 'camelCaseTransformMerge'
     | 'capitalCase'
     | 'constantCase'
     | 'dotCase'
@@ -1354,10 +1357,11 @@ export interface NamingConventionTransformConfig {
     | 'upperCase'
     | 'lowerCase';
   /**
-   * Allowed values: camelCase, capitalCase, constantCase, dotCase, headerCase, noCase, paramCase, pascalCase, pathCase, sentenceCase, snakeCase, upperCase, lowerCase
+   * Allowed values: camelCase, camelCaseTransformMerge, capitalCase, constantCase, dotCase, headerCase, noCase, paramCase, pascalCase, pathCase, sentenceCase, snakeCase, upperCase, lowerCase
    */
   fieldArgumentNames?:
     | 'camelCase'
+    | 'camelCaseTransformMerge'
     | 'capitalCase'
     | 'constantCase'
     | 'dotCase'

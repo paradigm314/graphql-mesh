@@ -14,6 +14,7 @@ type NamingConventionTransformConfig @md {
 
 enum NamingConventionType {
   camelCase
+  camelCaseTransformMerge
   capitalCase
   constantCase
   dotCase
