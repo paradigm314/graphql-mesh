@@ -888,6 +888,12 @@ export interface OpenapiHandler {
   queryParams?: {
     [k: string]: any;
   };
+  /**
+   * The name of the field or fields holding your operation id. The fields will
+   * be checked in order, falling back to default operationId behavior if none
+   * are found.
+   */
+  operationIdFields?: string[];
 }
 export interface OASSelectQueryOrMutationFieldConfig {
   /**
