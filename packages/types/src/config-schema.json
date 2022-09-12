@@ -1914,6 +1914,14 @@
           "type": "object",
           "properties": {},
           "description": "JSON object representing the query search parameters to add to the API calls"
+        },
+        "operationIdFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "additionalItems": false,
+          "description": "The name of the field or fields holding your operation id. The fields will\nbe checked in order, falling back to default operationId behavior if none\nare found."
         }
       },
       "required": ["source"]

@@ -26,6 +26,7 @@ interface GetJSONSchemaOptionsFromOpenAPIOptionsParams {
   operationHeaders?: OperationHeadersConfiguration;
   queryParams?: Record<string, any>;
   selectQueryOrMutationField?: OpenAPILoaderSelectQueryOrMutationFieldConfig[];
+  operationIdFields?: string[];
   logger?: Logger;
 }
 
@@ -41,6 +42,7 @@ export async function getJSONSchemaOptionsFromOpenAPIOptions(
     operationHeaders,
     queryParams = {},
     selectQueryOrMutationField = [],
+    operationIdFields,
     logger = new DefaultLogger('getJSONSchemaOptionsFromOpenAPIOptions'),
   }: GetJSONSchemaOptionsFromOpenAPIOptionsParams
 ) {
@@ -123,11 +125,21 @@ export async function getJSONSchemaOptionsFromOpenAPIOptions(
         continue;
       }
       const methodObj = pathObj[method] as OpenAPIV2.OperationObject | OpenAPIV3.OperationObject;
+
+      let operationId = methodObj.operationId && sanitizeNameForGraphQL(methodObj.operationId);
+      if (operationIdFields) {
+        for (const operationIdField in operationIdFields) {
+          if (operationIdFields[operationIdField] in methodObj) {
+            operationId = methodObj[operationIdFields[operationIdField]];
+            break;
+          }
+        }
+      }
       const operationConfig: OperationConfig = {
         method: method.toUpperCase() as HTTPMethod,
         path: relativePath,
         type: method.toUpperCase() === 'GET' ? 'query' : 'mutation',
-        field: methodObj.operationId && sanitizeNameForGraphQL(methodObj.operationId),
+        field: operationId,
         description: methodObj.description || methodObj.summary,
         schemaHeaders,
         operationHeaders,
